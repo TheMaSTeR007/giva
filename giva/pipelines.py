@@ -62,7 +62,7 @@ class GivaPipeline:
         if isinstance(item, ProductRawItem):
             data_table_name = 'products_links'
         elif isinstance(item, ProductDataItem):
-            data_table_name = 'products_data'
+            data_table_name = 'products_data_new'
         else:
             print('Skipped Processing...')
             # If the item type is unknown, skip processing

@@ -18,7 +18,8 @@ NEWSPIDER_MODULE = "giva.spiders"
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
-HTTPERROR_ALLOWED_CODES = [404, 500]  # Add any other status codes you want to handle
+# HTTPERROR_ALLOWED_CODES = [404, 500]  # Add any other status codes you want to handle
+HTTPERROR_ALLOWED_CODES = [code for code in range(400, 600)]  # Add any other status codes you want to handle
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32

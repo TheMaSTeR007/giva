@@ -98,7 +98,10 @@ def get_product_offer_price(json_dict):
     :param json_dict: The JSON dictionary containing product data.
     :return: The product offer price or 'N/A' if the field is not present.
     """
-    return json_dict.get('offers', {})[0].get('price', 'N/A')
+    list_of_dicts = json_dict.get('offers', {})
+    for dict_ in list_of_dicts:
+        if 'url' in dict_:
+            return dict_.get('price', 'N/A')
 
 
 def get_product_currency(json_dict):
@@ -107,7 +110,10 @@ def get_product_currency(json_dict):
     :param json_dict: The JSON dictionary containing product data.
     :return: The product currency or 'N/A' if the field is not present.
     """
-    return json_dict.get('offers', {})[0].get('priceCurrency', 'N/A')
+    list_of_dicts = json_dict.get('offers', {})
+    for dict_ in list_of_dicts:
+        if 'url' in dict_:
+            return dict_.get('priceCurrency', 'N/A')
 
 
 def get_product_variant_url(json_dict):
@@ -116,7 +122,10 @@ def get_product_variant_url(json_dict):
     :param json_dict: The JSON dictionary containing product data.
     :return: The product variant URL or 'N/A' if the field is not present.
     """
-    return json_dict.get('offers', {})[0].get('url', 'N/A')
+    list_of_dicts = json_dict.get('offers', {})
+    for dict_ in list_of_dicts:
+        if 'url' in dict_:
+            return dict_.get('url', 'N/A')
 
 
 def get_product_rating_value(json_dict):
@@ -159,7 +168,7 @@ class ProductsDataSpiderSpider(scrapy.Spider):
         self.cursor = self.client.cursor()  # Create a cursor object to interact with the database
 
         # Path to the file where URLs with non-200 status codes will be saved
-        self.error_log_file = os.path.join(project_files_dir, 'Error_Urls',  'error_urls.txt')
+        self.error_log_file = os.path.join(project_files_dir, 'Error_Urls', 'error_urls.txt')
 
     def log_error_url(self, url: str, status_code: int):
         """
@@ -178,7 +187,7 @@ class ProductsDataSpiderSpider(scrapy.Spider):
         """
         fetch_table = 'products_links'
         # Query to select URLs that are pending for scraping
-        fetch_query = f'''SELECT * FROM {fetch_table} WHERE url_status = 'Pending' and id between 2401 and 2810;'''
+        fetch_query = f'''SELECT * FROM {fetch_table} WHERE url_status = 'Pending' and id between 1 and 2810;'''
         self.cursor.execute(query=fetch_query)
         rows = self.cursor.fetchall()
         print(f'Fetched {len(rows)} data.')
