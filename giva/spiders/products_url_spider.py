@@ -43,6 +43,7 @@ class ProductsUrlSpiderSpider(scrapy.Spider):
     def start_requests(self) -> Iterable[Request]:
         # Define the initial URL to start scraping
         start_url = "https://www.giva.co/collections/all"
+        # C:/Users/jaimin.gurjar/AppData/Local/Temp/Rar$EXa5156.7368.rartemp/{}.html
         print('Working on:', start_url)  # Print the URL being processed
         yield scrapy.Request(
             url=start_url,
